@@ -11,9 +11,14 @@ namespace DateTimeDiff.Classes
 
         public DateDiffStorage DateDiff(DateTime first, DateTime second)
         {
-            var daysDelta = second.Day - first.Day;
+            var hoursDelta = second.Hour - first.Hour;
+            
             var monthsDelta = 0;
             var yearsDelta = 0;
+
+            var daysDelta = (hoursDelta < 0)? 1 : 0;
+
+            daysDelta = second.Day - first.Day - daysDelta;
             if (daysDelta < 0)
             {
                 daysDelta += DateTime.DaysInMonth(first.Year, first.Month);
