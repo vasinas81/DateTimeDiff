@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DateTimeDiff.Classes
 {
-    class TimeZoneDiffDecorator : DateDiffDecorator
+    public class TimeZoneDiffDecorator : DateDiffDecorator
     {
         public TimeZoneDiffDecorator(IDateDifferentiator differentiator) : base(differentiator) { }
         

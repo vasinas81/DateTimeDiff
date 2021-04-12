@@ -5,7 +5,7 @@ using System.Text;
 namespace DateTimeDiff.Classes
 {
 
-    abstract class DateDiffDecorator : IDateDifferentiator
+    public abstract class DateDiffDecorator : IDateDifferentiator
     {
         protected IDateDifferentiator _differentiator;
         public DateDiffDecorator(IDateDifferentiator differentiator)
