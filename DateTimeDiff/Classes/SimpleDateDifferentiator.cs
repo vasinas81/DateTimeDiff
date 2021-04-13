@@ -11,6 +11,12 @@ namespace DateTimeDiff.Classes
 
         public DateDiffStorage DateDiff(DateTime first, DateTime second)
         {
+            if ((second - first).TotalMilliseconds < 0)
+            {
+                var tmpStore = first;
+                first = second;
+                second = tmpStore;
+            }
             var hoursDelta = second.Hour - first.Hour;
             
             var monthsDelta = 0;
