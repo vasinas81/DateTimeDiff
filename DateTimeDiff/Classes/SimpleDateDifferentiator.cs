@@ -9,20 +9,14 @@ namespace DateTimeDiff.Classes
         public SimpleDateDifferentiator()
         { }
 
-        public DateDiffStorage DateDiff(DateTime first, DateTime second)
+        private DateDiffStorage InnerDiff(DateTime first, DateTime second)
         {
-            if ((second - first).TotalMilliseconds < 0)
-            {
-                var tmpStore = first;
-                first = second;
-                second = tmpStore;
-            }
             var hoursDelta = second.Hour - first.Hour;
-            
+
             var monthsDelta = 0;
             var yearsDelta = 0;
 
-            var daysDelta = (hoursDelta < 0)? 1 : 0;
+            var daysDelta = (hoursDelta < 0) ? 1 : 0;
 
             daysDelta = second.Day - first.Day - daysDelta;
             if (daysDelta < 0)
@@ -40,7 +34,15 @@ namespace DateTimeDiff.Classes
 
             yearsDelta = second.Year - first.Year - yearsDelta;
 
-            return new DateDiffStorage(yearsDelta, monthsDelta, daysDelta); 
+            return new DateDiffStorage(yearsDelta, monthsDelta, daysDelta);
+        }
+
+        public DateDiffStorage DateDiff(DateTime first, DateTime second)
+        {
+            var (modFirst, modSecond) = (second - first).TotalMilliseconds < 0
+                ? (second, first)
+                : (first, second);
+            return InnerDiff(modFirst, modSecond);
         }
     }
 }
